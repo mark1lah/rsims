@@ -22,11 +22,11 @@ NumericVector positionsFromNoTradeBufferMinComm(NumericVector current_positions,
     if((R_IsNA(current_theo_weights[j])) | (current_theo_weights[j] == 0))
       target_positions[j] = 0;
     //else if(current_weights[j] < current_theo_weights[j] - trade_buffer)
-    else if(current_weights[j] / current_theo_weights[j] - 1 > trade_buffer)
+    else if(abs(current_weights[j] / current_theo_weights[j] - 1) > trade_buffer)
       target_positions[j] = (current_theo_weights[j])*cap_equity/current_prices[j];
     //else if(current_weights[j] > current_theo_weights[j] + trade_buffer)
-    else if(current_weights[j] / current_theo_weights[j] - 1 < trade_buffer)
-      target_positions[j] = (current_theo_weights[j])*cap_equity/current_prices[j];
+    //else if(current_weights[j] / current_theo_weights[j] - 1 < trade_buffer)
+     // target_positions[j] = (current_theo_weights[j])*cap_equity/current_prices[j];
   }
 
   return target_positions;
